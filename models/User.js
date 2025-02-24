@@ -13,9 +13,15 @@ const userSchema = new mongoose.Schema({
         type: String,
         required: true,  // Password is required
     },
+    email: {
+        type: String,   // Specify 'type' as 'String' for email
+        required: true,  // Email is required
+        unique: true,    // Ensure that the email is unique
+        match: [/^\S+@\S+\.\S+$/, 'Please provide a valid email address'],  // Optional regex validation for email format
+    },
     role: {
         type: String,
-        enum: ['USER','ADMIN'],  // Can either be 'user' or 'admin'
+        enum: ['USER', 'ADMIN'],  // Can either be 'user' or 'admin'
         default: 'USER',  // Default role is 'user'
     },
 }, { timestamps: true });  // Add createdAt and updatedAt timestamps
